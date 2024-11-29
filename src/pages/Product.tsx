@@ -4,6 +4,7 @@ import axios from "axios";
 import { baseUrl } from "@/config";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@/model/Product";
+import { toast } from "@/hooks/use-toast";
 
 export default function Product() {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,11 +16,13 @@ export default function Product() {
     axios
       .get(`${baseUrl}/products`)
       .then((response) => {
-        console.log(response.data);
         setProducts(response.data);
       })
       .catch(function (error) {
-        alert(error);
+        toast({
+          title: "You've encountered an error",
+          description: error,
+        });
       })
       .finally(() => setIsLoading(false));
   };
@@ -35,7 +38,7 @@ export default function Product() {
   ) : (
     <>
       <h1 className="font-bold text-2xl ml-12">Available Products</h1>
-      <div className="grid grid-flow-row-dense lg:grid-cols-4 gap-4 p-4 md:grid-cols-2 sm:grid-flow-row">
+      <div className="grid grid-flow-row-dense lg:grid-cols-3 gap-4 p-4 md:grid-cols-2 sm:grid-flow-row xl:grid-cols-4">
         {products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}

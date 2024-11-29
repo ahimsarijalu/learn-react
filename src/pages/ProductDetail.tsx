@@ -9,6 +9,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { baseUrl } from "@/config";
+import { toast } from "@/hooks/use-toast";
 import axios from "axios";
 import { Loader2, Star } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -44,7 +45,10 @@ export default function ProductDetail() {
         setProduct(response.data);
       })
       .catch((error) => {
-        alert("Failed to fetch product details. Please try again." + error);
+        toast({
+          title: "You've encountered an error",
+          description: error,
+        });
       })
       .finally(() => {
         setIsLoading(false);
@@ -62,9 +66,10 @@ export default function ProductDetail() {
         setRecommendation(filteredRecommendations);
       })
       .catch((error) => {
-        alert(
-          "Failed to fetch product recommendation. Please try again." + error
-        );
+        toast({
+          title: "You've encountered an error",
+          description: error,
+        });
       })
       .finally(() => {
         setIsLoading(false);
@@ -83,6 +88,10 @@ export default function ProductDetail() {
     return <div className="text-center mt-12">Product not found</div>;
   }
 
+  const isDiscounted = product.id % 2 === 0;
+  const rawPrice = isDiscounted ? product.price * 0.7 : product.price;
+  const price = Math.floor((rawPrice * 15848) / 10000) * 10000 + 9990;
+
   return (
     <>
       <div className="w-full min-h-full mx-auto p-6">
@@ -99,13 +108,32 @@ export default function ProductDetail() {
             <CardTitle className="text-left text-2xl font-bold mb-2">
               {product.title}
             </CardTitle>
-            <div className=" flex justify-between items-center mb-4">
-              <span className="text-2xl font-semibold text-black">
+            <div className="flex flex-row items-center mb-4 gap-4 content-center">
+              <p
+                className={`font-semibold text-black ${
+                  isDiscounted
+                    ? "line-through text-lg"
+                    : "text-2xl"
+                }`}
+              >
                 {new Intl.NumberFormat("id-ID", {
                   style: "currency",
                   currency: "IDR",
-                }).format(product.price * 15848)}
-              </span>
+                }).format(
+                  Math.floor((product.price * 15848) / 10000) * 10000 + 9990
+                )}
+              </p>
+
+              {isDiscounted ? (
+                <p className={`text-2xl font-semibold text-red-500`}>
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                  }).format(price)}
+                </p>
+              ) : (
+                <></>
+              )}
             </div>
 
             <div className="flex items-center mb-2">
@@ -123,13 +151,14 @@ export default function ProductDetail() {
                 {product.rating.rate.toFixed(1)} / 5 ({product.rating.count})
               </span>
             </div>
-
-            <Badge
-              variant={"outline"}
-              className="hover:bg-zinc-600 hover:text-white text-sm px-4 py-2 mt-2 inline-block"
-            >
-              {product.category}
-            </Badge>
+            <div>
+              <Badge
+                variant={"outline"}
+                className="hover:bg-zinc-600 hover:text-white text-sm px-4 py-2 mt-2 inline-block capitalize"
+              >
+                {product.category}
+              </Badge>
+            </div>
 
             <CardDescription className="text-gray-600 mb-4 mt-4 text-justify capitalize">
               {product.description}

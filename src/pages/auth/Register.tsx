@@ -61,10 +61,9 @@ export default function RegisterForm() {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      console.log(values);
       toast({
         title: "Registration successful",
-        description: `You have successfully registered an account. ${selectedFile?.name}`,
+        description: `You have successfully registered an account. ${selectedFile?.name} ; ${values}`,
       });
       form.reset();
     }, 2000);
