@@ -1,15 +1,16 @@
 import { Product } from "@/model/Product";
-import { Button } from "./ui/button";
 import {
   Card,
   CardHeader,
   CardContent,
   CardDescription,
   CardFooter,
+  CardTitle,
 } from "./ui/card";
 import { useNavigate } from "react-router-dom";
-import { Percent, ShoppingCart } from "lucide-react";
 import { Badge } from "./ui/badge";
+import { Percent } from "lucide-react";
+import AddToChart from "./AddToChart";
 
 export default function ProductCard({
   product,
@@ -25,13 +26,12 @@ export default function ProductCard({
   const price = Math.floor((rawPrice * 15848) / 10000) * 10000 + 9990;
 
   return (
-    <Card
-      key={key}
-      className="mx-4 my-4 flex flex-col justify-between"
-      onClick={() => navigate(`/product/${product.id}`)}
-    >
+    <Card key={key} className="mx-4 my-4 flex flex-col justify-between">
       <div>
-        <CardHeader className="relative w-full h-96 overflow-hidden rounded-lg">
+        <CardHeader
+          className="relative w-full h-96 overflow-hidden rounded-lg"
+          onClick={() => navigate(`/product/${product.id}`)}
+        >
           <img
             src={product.image}
             alt=""
@@ -39,7 +39,10 @@ export default function ProductCard({
             height={300}
           />
           {isDiscounted ? (
-            <Badge variant="destructive" className="absolute top-2 right-4 px-3 py-1 text-sm rounded-md">
+            <Badge
+              variant="destructive"
+              className="absolute top-2 right-4 px-3 py-1 text-sm rounded-md"
+            >
               <Percent />
             </Badge>
           ) : (
@@ -47,6 +50,9 @@ export default function ProductCard({
           )}
         </CardHeader>
         <CardContent className="mt-4 flex flex-col justify-between">
+          <CardTitle className="text-start text-2xl font-bold mb-2">
+            {product.title}
+          </CardTitle>
           <div className="flex flex-col items-center mb-4 content-center flex-wrap md:gap-4 gap-0 md:flex-row">
             <p
               className={`font-semibold text-black ${
@@ -72,15 +78,13 @@ export default function ProductCard({
               <></>
             )}
           </div>
-          <CardDescription className="mt-2 text-justify normal-case line-clamp-3">
+          <CardDescription className="mt-2 text-justify normal-case line-clamp-3 text-md">
             {product.description}
           </CardDescription>
         </CardContent>
       </div>
       <CardFooter className="flex justify-between">
-        <Button className="bg-zinc-800 text-white hover:bg-zinc-600 hover:text-white rounded-lg p-6 px-12 w-full">
-          <ShoppingCart /> Buy
-        </Button>
+        <AddToChart product={product} />
       </CardFooter>
     </Card>
   );

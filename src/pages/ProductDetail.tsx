@@ -1,6 +1,6 @@
+import AddToChart from "@/components/AddToChart";
 import ProductCard from "@/components/ProductCard";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -111,9 +111,7 @@ export default function ProductDetail() {
             <div className="flex flex-row items-center mb-4 gap-4 content-center">
               <p
                 className={`font-semibold text-black ${
-                  isDiscounted
-                    ? "line-through text-lg"
-                    : "text-2xl"
+                  isDiscounted ? "line-through text-lg" : "text-2xl"
                 }`}
               >
                 {new Intl.NumberFormat("id-ID", {
@@ -154,19 +152,17 @@ export default function ProductDetail() {
             <div>
               <Badge
                 variant={"outline"}
-                className="hover:bg-zinc-600 hover:text-white text-sm px-4 py-2 mt-2 inline-block capitalize"
+                className="hover:bg-zinc-600 hover:text-white text-xs px-4 py-2 mt-2 inline-block capitalize"
               >
                 {product.category}
               </Badge>
             </div>
 
-            <CardDescription className="text-gray-600 mb-4 mt-4 text-justify capitalize">
+            <CardDescription className="text-gray-600 mb-4 mt-4 text-justify capitalize text-md">
               {product.description}
             </CardDescription>
             <div className="flex flex-col gap-2 mt-12">
-              <Button className="w-full min-h-12 bg-zinc-800 text-white hover:bg-zinc-600">
-                Buy Now
-              </Button>
+              <AddToChart product={product} />
             </div>
           </CardContent>
         </Card>
