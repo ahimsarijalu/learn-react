@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function Camera() {
+export default function CameraPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [photo, setPhoto] = useState<string | null>(null);
@@ -95,34 +95,36 @@ export default function Camera() {
   };
 
   return (
-    <Card className="max-w-lg mx-auto p-4">
-      <CardContent>
-        <div className="flex flex-col items-center space-y-4">
-          {!cameraActive ? (
-            <Button onClick={handleStartCamera}>Start Camera</Button>
-          ) : (
-            <div className="camera">
-              <video
-                ref={videoRef}
-                onCanPlay={handleCanPlay}
-                className={`rounded-md ${streaming ? "block" : "hidden"}`}
+    <div className="flex flex-grow justify-center items-center">
+      <Card className="max-w-lg mx-auto p-4">
+        <CardContent className="p-16">
+          <div className="flex flex-col items-center space-y-4">
+            {!cameraActive ? (
+              <Button onClick={handleStartCamera}>Start Camera</Button>
+            ) : (
+              <div className="camera">
+                <video
+                  ref={videoRef}
+                  onCanPlay={handleCanPlay}
+                  className={`rounded-md ${streaming ? "block" : "hidden"}`}
+                />
+                <canvas ref={canvasRef} className="hidden" />
+              </div>
+            )}
+            <Button onClick={takePicture}>Take Picture</Button>
+            <Button variant="secondary" onClick={clearPhoto}>
+              Clear
+            </Button>
+            {photo && (
+              <img
+                src={photo}
+                alt="Captured"
+                className="mt-4 border border-gray-300 rounded-md"
               />
-              <canvas ref={canvasRef} className="hidden" />
-            </div>
-          )}
-          <Button onClick={takePicture}>Take Picture</Button>
-          <Button variant="secondary" onClick={clearPhoto}>
-            Clear
-          </Button>
-          {photo && (
-            <img
-              src={photo}
-              alt="Captured"
-              className="mt-4 border border-gray-300 rounded-md"
-            />
-          )}
-        </div>
-      </CardContent>
-    </Card>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

@@ -4,9 +4,8 @@ import Navbar from "./components/Navbar";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground m-8 sm:m-0">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navbar />
-      <div className="py-4"></div>
       <Outlet />
     </div>
   );

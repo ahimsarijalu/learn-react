@@ -30,7 +30,7 @@ interface Rating {
   count: number;
 }
 
-export default function ProductDetail() {
+export default function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);

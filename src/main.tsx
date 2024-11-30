@@ -2,50 +2,65 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import NotFound from "./pages/NotFound.tsx";
-import Home from "./pages/Home.tsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Invoice from "./pages/Invoice.tsx";
-import Dashboard from "./pages/Dashboard.tsx";
-import Product from "./pages/Product.tsx";
-import ProductDetail from "./pages/ProductDetail.tsx";
-import Register from "./pages/auth/Register.tsx";
+import NotFoundPage from "./pages/NotFoundPage.tsx";
+import HomePage from "./pages/HomePage.tsx";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import InvoicePage from "./pages/InvoicePage.tsx";
+import ProductPage from "./pages/ProductPage.tsx";
+import ProductDetailPage from "./pages/ProductDetailPage.tsx";
+import RegisterPage from "./pages/auth/RegisterPage.tsx";
 import { Toaster } from "./components/ui/toaster.tsx";
-import Camera from "./pages/Camera.tsx";
+import CameraPage from "./pages/CameraPage.tsx";
+import DashboardPage from "./pages/DashboardPage.tsx";
+import StatisticPage from "./pages/StatisticPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: "/product",
-        element: <Product />,
-      },
-      {
-        path: "/invoice",
-        element: <Invoice />,
+        element: <ProductPage />,
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: <DashboardPage />,
+        children: [
+          {
+            path: "",
+            element: <Navigate to="/dashboard/statistic" replace />,
+          },
+          {
+            path: "invoice",
+            element: <InvoicePage />,
+          },
+          {
+            path: "statistic",
+            element: <StatisticPage />,
+          },
+        ],
       },
       {
         path: "/product/:id",
-        element: <ProductDetail />,
+        element: <ProductDetailPage />,
       },
       {
         path: "/register",
-        element: <Register />
+        element: <RegisterPage />,
       },
       {
         path: "/camera",
-        element: <Camera />
+        element: <CameraPage />,
       },
     ],
   },
