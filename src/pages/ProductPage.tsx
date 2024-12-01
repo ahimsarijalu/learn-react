@@ -43,7 +43,6 @@ export default function ProductPage() {
         </div>
       ) : (
         <div className="grid grid-flow-row-dense lg:grid-cols-3 gap-4 p-4 md:grid-cols-2 sm:grid-flow-row xl:grid-cols-4">
-          <ProductCardSkeleton />
           {products.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}
