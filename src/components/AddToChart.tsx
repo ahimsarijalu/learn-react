@@ -25,7 +25,7 @@ export default function AddToChart({ product }: { product: Product }) {
   return (
     <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
       <DrawerTrigger asChild>
-        <Button className="bg-zinc-800 text-white hover:bg-zinc-600 hover:text-white rounded-lg p-6 px-12 w-full">
+        <Button className="bg-zinc-800 text-white hover:bg-zinc-600 hover:text-white rounded-lg p-6 px-12 w-full dark:bg-white dark:text-zinc-800">
           <ShoppingCart /> Buy
         </Button>
       </DrawerTrigger>

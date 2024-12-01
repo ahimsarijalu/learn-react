@@ -55,7 +55,7 @@ export default function ProductCard({
             </CardTitle>
             <div className="flex flex-col items-center mb-4 content-center flex-wrap md:gap-4 gap-0 md:flex-row">
               <p
-                className={`font-semibold text-black ${
+                className={`font-semibold text-black dark:text-white ${
                   isDiscounted ? "line-through text-lg" : "text-2xl"
                 }`}
               >
@@ -78,7 +78,7 @@ export default function ProductCard({
                 <></>
               )}
             </div>
-            <CardDescription className="mt-2 text-justify normal-case line-clamp-3 text-md">
+            <CardDescription className="mt-2 text-justify normal-case line-clamp-3 text-md dark:text-gray-100">
               {product.description}
             </CardDescription>
           </CardContent>

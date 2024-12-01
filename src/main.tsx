@@ -17,6 +17,7 @@ import { Toaster } from "./components/ui/toaster.tsx";
 import CameraPage from "./pages/CameraPage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import StatisticPage from "./pages/StatisticPage.tsx";
+import { ThemeProvider } from "./components/ThemeProvider.tsx";
 
 const router = createBrowserRouter([
   {
@@ -68,7 +69,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
+    </ThemeProvider>
     <Toaster />
   </StrictMode>
 );
