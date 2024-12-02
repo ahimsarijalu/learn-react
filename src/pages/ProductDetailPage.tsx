@@ -135,7 +135,7 @@ export default function ProductDetailPage() {
             </div>
 
             <div className="flex items-center mb-2">
-              {Array.from({ length: 5 }, (_, index) => (
+            {Array.from({ length: 5 }, (_, index) => (
                 <Star
                   key={index}
                   className={`w-5 h-5 ${
