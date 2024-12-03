@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const formSchema = z
   .object({
@@ -70,7 +71,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex flex-grow justify-center items-center">
+    <div className="flex flex-grow justify-center items-center w-full">
       <div className="max-w-md w-full mx-auto space-y-6">
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold">Register an account</h1>
@@ -171,6 +172,9 @@ export default function RegisterPage() {
             />
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? "Registering..." : "Register"}
+            </Button>
+            <Button variant="secondary" className="w-full">
+              <Link to="/auth/login">Login</Link>
             </Button>
           </form>
         </Form>

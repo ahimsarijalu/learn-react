@@ -35,7 +35,7 @@ export default function ProductCard({
             <img
               src={product.image}
               alt=""
-              className="object-contain w-full h-full"
+              className="object-contain w-full h-full bg-white p-8 rounded-md"
               height={300}
             />
             {isDiscounted ? (

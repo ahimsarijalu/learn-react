@@ -12,12 +12,16 @@ import {
 import InvoicePage from "./pages/InvoicePage.tsx";
 import ProductPage from "./pages/ProductPage.tsx";
 import ProductDetailPage from "./pages/ProductDetailPage.tsx";
-import RegisterPage from "./pages/auth/RegisterPage.tsx";
 import { Toaster } from "./components/ui/toaster.tsx";
 import CameraPage from "./pages/CameraPage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import StatisticPage from "./pages/StatisticPage.tsx";
 import { ThemeProvider } from "./components/ThemeProvider.tsx";
+import IndexDB from "./pages/IndexDB.tsx";
+import FileUpload from "./pages/FileUpload.tsx";
+import Laravel from "./pages/LaravelPage.tsx";
+import AuthPage from "./pages/auth/AuthPage.tsx";
+import BookDetailPage from "./pages/BookDetail.tsx";
 
 const router = createBrowserRouter([
   {
@@ -56,12 +60,37 @@ const router = createBrowserRouter([
         element: <ProductDetailPage />,
       },
       {
-        path: "/register",
-        element: <RegisterPage />,
+        path: "/auth",
+        element: <Navigate to="/auth/register" replace />,
       },
+      {
+        path: "/auth/register",
+        element: <AuthPage destination="register" />,
+      },
+      {
+        path: "/auth/login",
+        element: <AuthPage destination="login" />,
+      },
+
       {
         path: "/camera",
         element: <CameraPage />,
+      },
+      {
+        path: "/indexdb",
+        element: <IndexDB />,
+      },
+      {
+        path: "/file",
+        element: <FileUpload />,
+      },
+      {
+        path: "/laravel",
+        element: <Laravel />,
+      },
+      {
+        path: "/book/:id",
+        element: <BookDetailPage />,
       },
     ],
   },

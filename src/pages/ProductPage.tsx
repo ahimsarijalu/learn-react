@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { baseUrl } from "@/config";
+import { baseUrlFake } from "@/config";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@/model/Product";
 import { toast } from "@/hooks/use-toast";
@@ -14,7 +14,7 @@ export default function ProductPage() {
   const getData = () => {
     setIsLoading(true);
     axios
-      .get(`${baseUrl}/products`)
+      .get(`${baseUrlFake}/products`)
       .then((response) => {
         setProducts(response.data);
       })

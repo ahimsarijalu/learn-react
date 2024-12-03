@@ -8,27 +8,14 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
-import { baseUrl } from "@/config";
+import { baseUrlFake } from "@/config";
 import { toast } from "@/hooks/use-toast";
+import { Product } from "@/model/Product";
 import axios from "axios";
 import { Loader2, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: Rating;
-}
-
-interface Rating {
-  rate: number;
-  count: number;
-}
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -40,7 +27,7 @@ export default function ProductDetailPage() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${baseUrl}/products/${id}`)
+      .get(`${baseUrlFake}/products/${id}`)
       .then((response) => {
         setProduct(response.data);
       })
@@ -58,7 +45,7 @@ export default function ProductDetailPage() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${baseUrl}/products/category/${product?.category}`)
+      .get(`${baseUrlFake}/products/category/${product?.category}`)
       .then((response) => {
         const filteredRecommendations = response.data.filter(
           (item: Product) => item.id !== product?.id
@@ -135,7 +122,7 @@ export default function ProductDetailPage() {
             </div>
 
             <div className="flex items-center mb-2">
-            {Array.from({ length: 5 }, (_, index) => (
+              {Array.from({ length: 5 }, (_, index) => (
                 <Star
                   key={index}
                   className={`w-5 h-5 ${

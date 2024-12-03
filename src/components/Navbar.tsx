@@ -5,7 +5,15 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Camera, House, Package, PanelsTopLeft } from "lucide-react";
+import {
+  Camera,
+  Database,
+  FileJson2,
+  FileUp,
+  House,
+  Package,
+  PanelsTopLeft,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { ModeToggle } from "./ThemeChanger";
 
@@ -47,11 +55,35 @@ export default function Navbar() {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/indexdb">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Database className="me-2" />
+                  Index DB
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/file">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <FileUp className="me-2" />
+                  File Upload
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          <NavigationMenuItem>
+              <Link to="/laravel">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <FileJson2 className="me-2" />
+                  Laravel
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
           </NavigationMenuList>
 
           <NavigationMenuList className="gap-4">
             <NavigationMenuItem>
-              <Link to="/register">
+              <Link to="/auth/register">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Register
                 </NavigationMenuLink>
